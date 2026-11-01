@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-        <header class="topbar">
+    <header class="topbar">
         <a href="index.html" class="logo">RT Store</a>
         <nav class="nav-links">
             <a href="index.html">Ana Sayfa</a>
@@ -17,10 +17,23 @@
         </nav>
     </header>
     <main class="container">
-        <h1>Geliştirici Portalı</h1>
-        <p>RT Store ekosisteminde yerinizi alın, yazılımlarınızı milyonlarla buluşturun.</p>
+        <div class="auth-box">
+            <h2>Geliştirici Başvurusu</h2>
+            <p style="font-size:13px; color:#86868b; margin-bottom:20px;">Uygulamanızı RT Store ekosistemine dahil edin.</p>
+            <form id="dev-form" onsubmit="event.preventDefault(); alert('Başvurunuz alındı!');">
+                <div class="form-group">
+                    <label>Uygulama Adı</label>
+                    <input type="text" required placeholder="Uygulama Adı">
+                </div>
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <textarea rows="4" required placeholder="Uygulama detayları..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%;">Başvuruyu Gönder</button>
+            </form>
+        </div>
     </main>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/api.js"></script>
 </body>
 </html>
-
-

@@ -1,7 +1,7 @@
 ﻿{
-  "name": "rt-store",
-  "version": "1.0.0",
-  "description": "RT Store Enterprise Backend and Frontend Architecture",
+  "name": "rt-store-enterprise",
+  "version": "2.5.0",
+  "description": "RT Store Production Ready Ecosystem",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js"
