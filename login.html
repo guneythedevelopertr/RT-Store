@@ -6,36 +6,29 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body style="align-items:center; justify-content:center;">
-
-    <div class="auth-container">
+    <div class="auth-container" style="width: 100%;">
         <div class="brand-icon" style="margin-bottom:16px;">RT</div>
-        <div class="auth-title">Oturum Aç</div>
-        <div class="auth-subtitle">RT Store hesabınızla devam edin</div>
-
+        <h2 style="margin-bottom:8px;">Oturum Aç</h2>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">Hesabınızla giriş yapın</p>
         <form id="loginForm">
             <div class="form-group">
                 <label>Kullanıcı Adı veya E-posta</label>
-                <input type="text" id="usernameOrEmail" class="form-control" required placeholder="Kullanıcı adı ya da e-posta">
+                <input type="text" id="usernameOrEmail" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Şifre</label>
-                <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                <input type="password" id="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Giriş Yap</button>
         </form>
-        
-        <div style="margin-top:20px; font-size:13px; text-align:center;">
-            Hesabınız yok mu? <a href="register.html" style="color:var(--accent-color); text-decoration:none; font-weight:600;">Hemen Kayıt Olun</a>
-        </div>
+        <p style="margin-top:16px; font-size:13px; text-align:center;">Hesabın yok mu? <a href="register.html" style="color:var(--accent-color); text-decoration:none;">Kayıt Ol</a></p>
     </div>
-
     <script src="assets/js/config.js"></script>
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const usernameOrEmail = document.getElementById('usernameOrEmail').value;
             const password = document.getElementById('password').value;
-
             try {
                 const res = await fetch(window.RT_CONFIG.API_URL + '/login', {
                     method: 'POST',
@@ -50,9 +43,7 @@
                 } else {
                     alert('Hata: ' + data.message);
                 }
-            } catch(err) {
-                alert('Sunucuya ulaşılamadı! Lütfen sunucunuzun açık olduğunu kontrol edin.');
-            }
+            } catch(e) { alert('Sunucu bağlantı hatası!'); }
         });
     </script>
 </body>

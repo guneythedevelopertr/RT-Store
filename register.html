@@ -2,45 +2,38 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>RT Store — Hesap Oluştur</title>
+    <title>RT Store — Kayıt Ol</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body style="align-items:center; justify-content:center;">
-
-    <div class="auth-container">
+    <div class="auth-container" style="width: 100%;">
         <div class="brand-icon" style="margin-bottom:16px;">RT</div>
-        <div class="auth-title">Hesap Oluştur</div>
-        <div class="auth-subtitle">RT Store hizmetlerine erişmek için kayıt olun</div>
-
-        <form id="registerForm">
+        <h2 style="margin-bottom:8px;">Hesap Oluştur</h2>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">RT Store ekosistemine katılın</p>
+        <form id="regForm">
             <div class="form-group">
                 <label>Kullanıcı Adı</label>
-                <input type="text" id="username" class="form-control" required placeholder="ör: guneythedeveloper">
+                <input type="text" id="username" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>E-posta Adresi</label>
-                <input type="email" id="email" class="form-control" required placeholder="ornek@gmail.com">
+                <label>E-posta</label>
+                <input type="email" id="email" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Şifre</label>
-                <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                <input type="password" id="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Kayıt Ol</button>
         </form>
-        
-        <div style="margin-top:20px; font-size:13px; text-align:center;">
-            Zaten hesabınız var mı? <a href="login.html" style="color:var(--accent-color); text-decoration:none; font-weight:600;">Giriş Yapın</a>
-        </div>
+        <p style="margin-top:16px; font-size:13px; text-align:center;">Zaten hesabın var mı? <a href="login.html" style="color:var(--accent-color); text-decoration:none;">Giriş Yap</a></p>
     </div>
-
     <script src="assets/js/config.js"></script>
     <script>
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        document.getElementById('regForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-
             try {
                 const res = await fetch(window.RT_CONFIG.API_URL + '/register', {
                     method: 'POST',
@@ -54,9 +47,7 @@
                 } else {
                     alert('Hata: ' + data.message);
                 }
-            } catch(err) {
-                alert('Sunucuya ulaşılamadı! Lütfen sunucunuzun açık olduğunu kontrol edin.');
-            }
+            } catch(e) { alert('Sunucu bağlantı hatası!'); }
         });
     </script>
 </body>

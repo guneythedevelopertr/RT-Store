@@ -2,7 +2,6 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RT Store — Microsoft Store</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -24,7 +23,7 @@
 
     <div class="main-wrapper">
         <div class="top-bar">
-            <input type="text" class="search-bar" placeholder="Uygulamalar, oyunlar ve daha fazlasını arayın...">
+            <input type="text" class="search-bar" placeholder="Mağazada ara...">
             <div class="auth-buttons" id="auth-nav">
                 <a href="login.html" class="btn btn-secondary">Giriş Yap</a>
                 <a href="register.html" class="btn btn-primary">Kayıt Ol</a>
@@ -34,7 +33,7 @@
         <div class="content">
             <div class="hero-banner">
                 <h2>RT Store'a Hoş Geldiniz</h2>
-                <p>En yeni yazılımlar, optimize araçlar ve geliştirici paketleri burada.</p>
+                <p>En yeni araçlar ve performans yazılımları tek tıkla elinizin altında.</p>
             </div>
 
             <div class="section-title">Öne Çıkan Uygulamalar</div>
@@ -72,7 +71,7 @@
             .then(res => res.json())
             .then(() => {
                 document.getElementById('status-dot').classList.add('online');
-                document.getElementById('status-text').innerText = 'Sunucu Aktif';
+                document.getElementById('status-text').innerText = 'Sunucu Bağlı';
             })
             .catch(() => {
                 document.getElementById('status-text').innerText = 'Sunucu Çevrimdışı';
@@ -83,7 +82,6 @@
             document.getElementById('user-display').innerText = '👤 ' + loggedUser;
             document.getElementById('auth-nav').innerHTML = `<button onclick="logout()" class="btn btn-secondary">Çıkış Yap</button>`;
         }
-
         function logout() {
             localStorage.removeItem('rt_user');
             location.reload();

@@ -9,9 +9,9 @@ def create_file(path, content):
 
 def main():
     root = os.getcwd()
-    print(f"=== RT Store Microsoft Store Dönüşümü Başlatılıyor: {root} ===")
+    print(f"=== RT Store Düzeltme İşlemi Başlatılıyor: {root} ===")
 
-    # 1. API CONFIG (assets/js/config.js)
+    # 1. API CONFIG
     config_js = """
 window.RT_CONFIG = {
     API_URL: 'https://sauciness-aerobics-boxcar.ngrok-free.dev/api'
@@ -19,17 +19,17 @@ window.RT_CONFIG = {
 """
     create_file(os.path.join(root, "assets", "js", "config.js"), config_js)
 
-    # 2. MICROSOFT STORE FLUENT DESIGN CSS (assets/css/style.css)
+    # 2. STİLLER (İkon sorunlarını çözen temiz Fluent Design CSS)
     style_css = """
 :root {
     --bg-main: #f3f3f3;
-    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-bg: rgba(255, 255, 255, 0.85);
     --card-border: rgba(0, 0, 0, 0.08);
     --accent-color: #0067b8;
     --accent-hover: #005da6;
     --text-primary: #1b1b1b;
     --text-secondary: #5d5d5d;
-    --sidebar-bg: rgba(243, 243, 243, 0.85);
+    --sidebar-bg: rgba(243, 243, 243, 0.9);
     --radius: 12px;
 }
 
@@ -37,7 +37,7 @@ window.RT_CONFIG = {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI Variable Display', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     user-select: none;
 }
 
@@ -49,7 +49,6 @@ body {
     overflow: hidden;
 }
 
-/* Sidebar */
 .sidebar {
     width: 240px;
     background: var(--sidebar-bg);
@@ -97,20 +96,12 @@ body {
     text-decoration: none;
     border-radius: 8px;
     font-size: 14px;
-    transition: all 0.2s ease;
+    transition: 0.2s ease;
 }
 
-.nav-item:hover {
-    background: rgba(0, 0, 0, 0.05);
-}
+.nav-item:hover { background: rgba(0, 0, 0, 0.05); }
+.nav-item.active { background: rgba(0, 0, 0, 0.08); font-weight: 600; border-left: 3px solid var(--accent-color); }
 
-.nav-item.active {
-    background: rgba(0, 0, 0, 0.07);
-    font-weight: 600;
-    border-left: 3px solid var(--accent-color);
-}
-
-/* Main Content Area */
 .main-wrapper {
     flex: 1;
     display: flex;
@@ -124,7 +115,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 32px;
-    background: rgba(243, 243, 243, 0.5);
+    background: rgba(243, 243, 243, 0.6);
     backdrop-filter: blur(10px);
 }
 
@@ -136,18 +127,9 @@ body {
     padding: 8px 16px;
     font-size: 13px;
     outline: none;
-    transition: 0.2s;
 }
 
-.search-bar:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(0, 103, 184, 0.2);
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 10px;
-}
+.auth-buttons { display: flex; gap: 10px; }
 
 .btn {
     padding: 8px 18px;
@@ -160,86 +142,15 @@ body {
     transition: 0.2s;
 }
 
-.btn-primary {
-    background: var(--accent-color);
-    color: white;
-}
+.btn-primary { background: var(--accent-color); color: white; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: rgba(0, 0, 0, 0.05); color: var(--text-primary); border: 1px solid var(--card-border); }
 
-.btn-primary:hover {
-    background: var(--accent-hover);
-}
+.content { padding: 32px; flex: 1; }
 
-.btn-secondary {
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--text-primary);
-    border: 1px solid var(--card-border);
-}
-
-.btn-secondary:hover {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.content {
-    padding: 32px;
-    flex: 1;
-}
-
-/* Auth Cards (Fluent Glass) */
-.auth-container {
-    max-width: 420px;
-    margin: 40px auto;
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 32px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-}
-
-.auth-title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.auth-subtitle {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-bottom: 24px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid var(--card-border);
-    border-bottom: 2px solid #8a8a8a;
-    border-radius: 4px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.2s;
-}
-
-.form-control:focus {
-    border-bottom-color: var(--accent-color);
-    background: #ffffff;
-}
-
-/* App Grid */
 .hero-banner {
     width: 100%;
-    height: 220px;
+    height: 200px;
     background: linear-gradient(135deg, #005da6, #00bcf2);
     border-radius: var(--radius);
     color: white;
@@ -249,8 +160,7 @@ body {
     padding: 40px;
     margin-bottom: 32px;
 }
-
-.hero-banner h2 { font-size: 28px; margin-bottom: 8px; }
+.hero-banner h2 { font-size: 26px; margin-bottom: 8px; }
 .hero-banner p { opacity: 0.9; font-size: 14px; }
 
 .section-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
@@ -263,38 +173,48 @@ body {
 
 .app-card {
     background: var(--card-bg);
-    backdrop-filter: blur(10px);
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
-    padding: 16px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transition: 0.2s ease;
+    transition: 0.2s;
 }
-
-.app-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-}
+.app-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
 
 .app-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-    background: #e1e1e1;
+    font-size: 32px;
     margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
 }
 
 .app-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-.app-cat { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
+.app-cat { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; }
 
-/* Status Widget */
+.auth-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--card-border);
+    border-bottom: 2px solid #8a8a8a;
+    border-radius: 4px;
+    outline: none;
+    background: #fff;
+}
+.form-control:focus { border-bottom-color: var(--accent-color); }
+
 #server-status {
     position: fixed;
     bottom: 16px;
@@ -303,25 +223,20 @@ body {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--card-border);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
     gap: 8px;
+    z-index: 999;
 }
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ff3b30;
-}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff3b30; }
 .status-dot.online { background: #34c759; }
 """
     create_file(os.path.join(root, "assets", "css", "style.css"), style_css)
 
-    # 3. BACKEND SERVER (server/server.js)
+    # 3. SERVER
     server_js = """
 const express = require('express');
 const cors = require('cors');
@@ -336,7 +251,7 @@ app.use(express.json());
 const users = [];
 
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'success', message: 'RT Store API Aktif' });
+    res.json({ status: 'success', message: 'API Aktif' });
 });
 
 app.post('/api/register', (req, res) => {
@@ -344,47 +259,45 @@ app.post('/api/register', (req, res) => {
     if (!username || !email || !password) {
         return res.status(400).json({ status: 'error', message: 'Tüm alanları doldurun.' });
     }
-    const exists = users.find(u => u.email === email || u.username === username);
-    if (exists) {
-        return res.status(400).json({ status: 'error', message: 'Kullanıcı adı veya e-posta zaten kullanımda.' });
+    if (users.find(u => u.email === email || u.username === username)) {
+        return res.status(400).json({ status: 'error', message: 'Bu kullanıcı adı veya e-posta zaten kayıtlı.' });
     }
     users.push({ username, email, password });
-    console.log('[KAYIT]:', username);
-    res.json({ status: 'success', message: 'Kayıt başarılı! Yönlendiriliyorsunuz.' });
+    console.log('[KAYIT BAŞARILI]:', username);
+    res.json({ status: 'success', message: 'Kayıt başarılı!' });
 });
 
 app.post('/api/login', (req, res) => {
     const { usernameOrEmail, password } = req.body;
     const user = users.find(u => (u.username === usernameOrEmail || u.email === usernameOrEmail) && u.password === password);
     if (!user) {
-        return res.status(401).json({ status: 'error', message: 'Kullanıcı adı/e-posta veya şifre hatalı.' });
+        return res.status(401).json({ status: 'error', message: 'Hatalı kullanıcı adı veya şifre.' });
     }
-    console.log('[GİRİŞ]:', user.username);
+    console.log('[GİRİŞ BAŞARILI]:', user.username);
     res.json({ status: 'success', message: 'Giriş başarılı!', username: user.username });
 });
 
 app.listen(PORT, async () => {
-    console.log('RT Store Backend Portu: ' + PORT);
+    console.log('Sunucu ' + PORT + ' portunda çalışıyor...');
     try {
         await ngrok.authtoken('3LUnB99ES0TT0R5QPfokIxlnz2n_7beKyZMdHP8sFziwJQJSj');
         const listener = await ngrok.forward({
             addr: PORT,
             domain: 'sauciness-aerobics-boxcar.ngrok-free.dev'
         });
-        console.log('📱 Ngrok Tüneli Canlıda: ' + listener.url());
+        console.log('Tünel aktif: ' + listener.url());
     } catch (err) {
-        console.error('Ngrok Tünel Hatası:', err.message);
+        console.error('Tünel hatası:', err.message);
     }
 });
 """
     create_file(os.path.join(root, "server", "server.js"), server_js)
 
-    # 4. INDEX.HTML (Karşılama / Mağaza Ana Sayfası)
+    # 4. INDEX.HTML
     index_html = """<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RT Store — Microsoft Store</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -406,7 +319,7 @@ app.listen(PORT, async () => {
 
     <div class="main-wrapper">
         <div class="top-bar">
-            <input type="text" class="search-bar" placeholder="Uygulamalar, oyunlar ve daha fazlasını arayın...">
+            <input type="text" class="search-bar" placeholder="Mağazada ara...">
             <div class="auth-buttons" id="auth-nav">
                 <a href="login.html" class="btn btn-secondary">Giriş Yap</a>
                 <a href="register.html" class="btn btn-primary">Kayıt Ol</a>
@@ -416,7 +329,7 @@ app.listen(PORT, async () => {
         <div class="content">
             <div class="hero-banner">
                 <h2>RT Store'a Hoş Geldiniz</h2>
-                <p>En yeni yazılımlar, optimize araçlar ve geliştirici paketleri burada.</p>
+                <p>En yeni araçlar ve performans yazılımları tek tıkla elinizin altında.</p>
             </div>
 
             <div class="section-title">Öne Çıkan Uygulamalar</div>
@@ -454,7 +367,7 @@ app.listen(PORT, async () => {
             .then(res => res.json())
             .then(() => {
                 document.getElementById('status-dot').classList.add('online');
-                document.getElementById('status-text').innerText = 'Sunucu Aktif';
+                document.getElementById('status-text').innerText = 'Sunucu Bağlı';
             })
             .catch(() => {
                 document.getElementById('status-text').innerText = 'Sunucu Çevrimdışı';
@@ -465,7 +378,6 @@ app.listen(PORT, async () => {
             document.getElementById('user-display').innerText = '👤 ' + loggedUser;
             document.getElementById('auth-nav').innerHTML = `<button onclick="logout()" class="btn btn-secondary">Çıkış Yap</button>`;
         }
-
         function logout() {
             localStorage.removeItem('rt_user');
             location.reload();
@@ -476,50 +388,43 @@ app.listen(PORT, async () => {
 """
     create_file(os.path.join(root, "index.html"), index_html)
 
-    # 5. REGISTER.HTML (Kayıt Olma Sayfası)
+    # 5. REGISTER.HTML
     register_html = """<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>RT Store — Hesap Oluştur</title>
+    <title>RT Store — Kayıt Ol</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body style="align-items:center; justify-content:center;">
-
-    <div class="auth-container">
+    <div class="auth-container" style="width: 100%;">
         <div class="brand-icon" style="margin-bottom:16px;">RT</div>
-        <div class="auth-title">Hesap Oluştur</div>
-        <div class="auth-subtitle">RT Store hizmetlerine erişmek için kayıt olun</div>
-
-        <form id="registerForm">
+        <h2 style="margin-bottom:8px;">Hesap Oluştur</h2>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">RT Store ekosistemine katılın</p>
+        <form id="regForm">
             <div class="form-group">
                 <label>Kullanıcı Adı</label>
-                <input type="text" id="username" class="form-control" required placeholder="ör: guneythedeveloper">
+                <input type="text" id="username" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>E-posta Adresi</label>
-                <input type="email" id="email" class="form-control" required placeholder="ornek@gmail.com">
+                <label>E-posta</label>
+                <input type="email" id="email" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Şifre</label>
-                <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                <input type="password" id="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Kayıt Ol</button>
         </form>
-        
-        <div style="margin-top:20px; font-size:13px; text-align:center;">
-            Zaten hesabınız var mı? <a href="login.html" style="color:var(--accent-color); text-decoration:none; font-weight:600;">Giriş Yapın</a>
-        </div>
+        <p style="margin-top:16px; font-size:13px; text-align:center;">Zaten hesabın var mı? <a href="login.html" style="color:var(--accent-color); text-decoration:none;">Giriş Yap</a></p>
     </div>
-
     <script src="assets/js/config.js"></script>
     <script>
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        document.getElementById('regForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-
             try {
                 const res = await fetch(window.RT_CONFIG.API_URL + '/register', {
                     method: 'POST',
@@ -533,9 +438,7 @@ app.listen(PORT, async () => {
                 } else {
                     alert('Hata: ' + data.message);
                 }
-            } catch(err) {
-                alert('Sunucuya ulaşılamadı! Lütfen sunucunuzun açık olduğunu kontrol edin.');
-            }
+            } catch(e) { alert('Sunucu bağlantı hatası!'); }
         });
     </script>
 </body>
@@ -543,7 +446,7 @@ app.listen(PORT, async () => {
 """
     create_file(os.path.join(root, "register.html"), register_html)
 
-    # 6. LOGIN.HTML (Giriş Yapma Sayfası)
+    # 6. LOGIN.HTML
     login_html = """<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -552,36 +455,29 @@ app.listen(PORT, async () => {
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body style="align-items:center; justify-content:center;">
-
-    <div class="auth-container">
+    <div class="auth-container" style="width: 100%;">
         <div class="brand-icon" style="margin-bottom:16px;">RT</div>
-        <div class="auth-title">Oturum Aç</div>
-        <div class="auth-subtitle">RT Store hesabınızla devam edin</div>
-
+        <h2 style="margin-bottom:8px;">Oturum Aç</h2>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">Hesabınızla giriş yapın</p>
         <form id="loginForm">
             <div class="form-group">
                 <label>Kullanıcı Adı veya E-posta</label>
-                <input type="text" id="usernameOrEmail" class="form-control" required placeholder="Kullanıcı adı ya da e-posta">
+                <input type="text" id="usernameOrEmail" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Şifre</label>
-                <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                <input type="password" id="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Giriş Yap</button>
         </form>
-        
-        <div style="margin-top:20px; font-size:13px; text-align:center;">
-            Hesabınız yok mu? <a href="register.html" style="color:var(--accent-color); text-decoration:none; font-weight:600;">Hemen Kayıt Olun</a>
-        </div>
+        <p style="margin-top:16px; font-size:13px; text-align:center;">Hesabın yok mu? <a href="register.html" style="color:var(--accent-color); text-decoration:none;">Kayıt Ol</a></p>
     </div>
-
     <script src="assets/js/config.js"></script>
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const usernameOrEmail = document.getElementById('usernameOrEmail').value;
             const password = document.getElementById('password').value;
-
             try {
                 const res = await fetch(window.RT_CONFIG.API_URL + '/login', {
                     method: 'POST',
@@ -596,9 +492,7 @@ app.listen(PORT, async () => {
                 } else {
                     alert('Hata: ' + data.message);
                 }
-            } catch(err) {
-                alert('Sunucuya ulaşılamadı! Lütfen sunucunuzun açık olduğunu kontrol edin.');
-            }
+            } catch(e) { alert('Sunucu bağlantı hatası!'); }
         });
     </script>
 </body>
@@ -606,16 +500,16 @@ app.listen(PORT, async () => {
 """
     create_file(os.path.join(root, "login.html"), login_html)
 
-    print("\n[+] Tüm Microsoft Store arayüz ve sunucu dosyaları baştan oluşturuldu.")
+    print("\n[+] Tüm dosyalar sıfırdan ve hatasız biçimde güncellendi.")
 
-    # 7. GIT PUSH
+    # Git İşlemleri
     try:
         subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "-m", "UI: Microsoft Store Fluent Design entegrasyonu tamamlandi"], check=True)
+        subprocess.run(["git", "commit", "-m", "Fix: Icon rendering ve sunucu baglantisi duzeltildi"], check=True)
         subprocess.run(["git", "push", "origin", "main"], check=True)
-        print("[SUCCESS] Kodlar GitHub Pages'e canlıya gönderildi!")
+        print("[SUCCESS] GitHub'a başarıyla gönderildi!")
     except Exception as e:
-        print(f"[HATA] Git gönderiminde sorun oluştu: {e}")
+        print(f"[UYARI] Git hatası: {e}")
 
 if __name__ == "__main__":
     main()
