@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Bellek tabanlı geçici kullanıcı veritabanı simülasyonu
 const users = [];
 
 app.get('/api/health', (req, res) => {
@@ -26,7 +25,7 @@ app.post('/api/register', (req, res) => {
     }
     users.push({ username, email, password });
     console.log('Yeni kullanıcı kaydedildi:', username);
-    res.json({ status: 'success', message: 'Kayıt başarılı.', token: 'mock-jwt-token-' + username });
+    res.json({ status: 'success', message: 'Kayıt başarılı.', token: 'mock-token-' + username });
 });
 
 app.post('/api/login', (req, res) => {
@@ -36,7 +35,7 @@ app.post('/api/login', (req, res) => {
         return res.status(401).json({ status: 'error', message: 'Geçersiz kullanıcı adı veya şifre.' });
     }
     console.log('Kullanıcı giriş yaptı:', user.username);
-    res.json({ status: 'success', message: 'Giriş başarılı.', token: 'mock-jwt-token-' + user.username });
+    res.json({ status: 'success', message: 'Giriş başarılı.', token: 'mock-token-' + user.username });
 });
 
 app.listen(PORT, async () => {
@@ -47,8 +46,8 @@ app.listen(PORT, async () => {
             addr: PORT,
             domain: 'sauciness-aerobics-boxcar.ngrok-free.dev'
         });
-        console.log('Tünel aktif: ' + listener.url());
+        console.log('Ngrok tüneli aktif: ' + listener.url());
     } catch (err) {
-        console.error('Tünel başlatılamadı:', err.message);
+        console.error('Ngrok tüneli başlatılamadı:', err.message);
     }
 });

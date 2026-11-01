@@ -1,46 +1,50 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RT Store — Hesap Yönetimi</title>
+    <title>RT Store — Giriş Yap</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header class="topbar">
-        <a href="index.html" class="logo">RT Store</a>
-        <nav class="nav-links">
-            <a href="index.html">Ana Sayfa</a>
-            <a href="apps.html">Uygulamalar</a>
-            <a href="developer.html">Geliştirici Ol</a>
-            <a href="login.html">Giriş Yap</a>
-        </nav>
-    </header>
-    <main class="container">
-        <div class="auth-box">
-            <h2>Yeni Hesap Oluştur</h2>
-            <form id="register-form">
-                <div class="form-group">
-                    <label for="username">Kullanıcı Adı</label>
-                    <input type="text" id="username" required placeholder="kullanici_adi">
-                </div>
-                <div class="form-group">
-                    <label for="email">E-posta Adresi</label>
-                    <input type="email" id="email" required placeholder="ornek@domain.com">
-                </div>
-                <div class="form-group">
-                    <label for="password">Şifre (8-16 Karakter)</label>
-                    <input type="password" id="password" required minlength="8" maxlength="16" placeholder="••••••••">
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password">Şifre Tekrar</label>
-                    <input type="password" id="confirm-password" required minlength="8" maxlength="16" placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-primary" style="width:100%;">Kayıt Ol</button>
-            </form>
-        </div>
-    </main>
+    <div class="container" style="max-width:400px; margin:50px auto; padding:20px; border:1px solid #ccc; border-radius:5px;">
+        <h2>Giriş Yap</h2>
+        <form id="login-form">
+            <div style="margin-bottom:15px;">
+                <label>Kullanıcı Adı veya E-posta</label><br>
+                <input type="text" id="usernameOrEmail" required style="width:100%; padding:8px; margin-top:5px;">
+            </div>
+            <div style="margin-bottom:15px;">
+                <label>Şifre</label><br>
+                <input type="password" id="password" required style="width:100%; padding:8px; margin-top:5px;">
+            </div>
+            <button type="submit" style="width:100%; padding:10px; background:#007bff; color:#fff; border:none; border-radius:5px; cursor:pointer;">Giriş Yap</button>
+        </form>
+        <p style="margin-top:15px; text-align:center;">Hesabın yok mu? <a href="register.html">Kayıt Ol</a></p>
+    </div>
     <script src="assets/js/config.js"></script>
-    <script src="assets/js/api.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const usernameOrEmail = document.getElementById('usernameOrEmail').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch(window.RT_CONFIG.API_URL + '/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usernameOrEmail, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Giriş başarılı! Mağazaya yönlendiriliyorsunuz.');
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Hata: ' + data.message);
+                }
+            } catch (err) {
+                alert('Sunucu bağlantı hatası.');
+            }
+        });
+    </script>
 </body>
 </html>
