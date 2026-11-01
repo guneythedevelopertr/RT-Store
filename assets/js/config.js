@@ -1,3 +1,3 @@
 ﻿window.RT_CONFIG = {
-    API_URL: 'https://clapped-outrank-triangle.ngrok-free.dev/api'
+    API_URL: 'https://sauciness-aerobics-boxcar.ngrok-free.dev/api'
 };
