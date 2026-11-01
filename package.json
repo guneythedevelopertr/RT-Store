@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "rt-store-enterprise",
   "version": "2.5.0",
   "description": "RT Store Production Ready Ecosystem",
@@ -7,7 +7,8 @@
     "start": "node server/server.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5"
+    "@ngrok/ngrok": "^1.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
   }
 }
